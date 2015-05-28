@@ -21,8 +21,6 @@
 
 //@property (strong, nonatomic, readwrite) SDImageCache *imageCache;
 //@property (strong, nonatomic, readwrite) SDWebImageDownloader *imageDownloader;
-@property (strong, nonatomic) SDImageCache *imageCache;
-@property (strong, nonatomic) SDWebImageDownloader *imageDownloader;
 
 @property (strong, nonatomic) NSMutableSet *failedURLs;
 @property (strong, nonatomic) NSMutableArray *runningOperations;
