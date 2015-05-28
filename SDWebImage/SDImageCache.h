@@ -76,6 +76,11 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  */
 - (id)initWithNamespace:(NSString *)ns;
 
+
+- (id)initWithNamespace:(NSString *)ns diskCacheDirectory:(NSString *)directory;
+
+
+
 -(NSString *)makeDiskCachePath:(NSString*)fullNamespace;
 
 /**
