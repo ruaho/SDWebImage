@@ -17,6 +17,7 @@
 @end
 
 @implementation AutoPurgeCache
+static NSString * categoryKey = @"IMG_CATEGORY=";
 
 - (id)init
 {
@@ -90,7 +91,8 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
 
 - (id)initWithNamespace:(NSString *)ns diskCacheDirectory:(NSString *)directory {
     if ((self = [super init])) {
-        NSString *fullNamespace = [@"com.hackemist.SDWebImageCache." stringByAppendingString:ns];
+       // NSString *fullNamespace = [@"com.hackemist.SDWebImageCache." stringByAppendingString:ns];
+         NSString *fullNamespace = [@"" stringByAppendingString:ns];
         
         // initialise PNG signature data
         kPNGSignatureData = [NSData dataWithBytes:kPNGSignatureBytes length:8];
@@ -175,7 +177,8 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
 }
 
 - (NSString *)defaultCachePathForKey:(NSString *)key {
-    return [self cachePathForKey:key inPath:self.diskCachePath];
+    NSString * localPath =  [self getPathForKey:key];
+    return [self cachePathForKey:key inPath:localPath];
 }
 
 #pragma mark SDImageCache (private)
@@ -584,6 +587,28 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
             });
         }
     });
+}
+
+
+/**
+ * 根据urlkey获取存储路径
+ * 如果urlkey中包含category参数, 我们会保存该urlkey文件到对应的category目录下,  如果目录不存在会创建该category目录
+ *
+ */
+-(NSString *) getPathForKey:(NSString *) urlKey {
+    NSString * localPath = self.diskCachePath;
+    //检测是否有category参数
+    NSRange range = [urlKey rangeOfString:categoryKey];
+    if (range.location != NSNotFound) {
+        NSString * category = [urlKey substringFromIndex:NSMaxRange(range)];
+        localPath = [localPath stringByAppendingString:@"/"];
+        localPath = [localPath stringByAppendingString:category];
+        //如果文件夹不存在则创建
+        if (![_fileManager fileExistsAtPath:localPath]) {
+            [_fileManager createDirectoryAtPath:localPath withIntermediateDirectories:YES attributes:nil error:NULL];
+        }
+    }
+    return localPath;
 }
 
 @end
