@@ -269,6 +269,11 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  *Return the cache key for a given URL
  */
 - (NSString *)cacheKeyForURL:(NSURL *)url;
+/**
+ *  remove failedURLs
+ */
+- (void)removeFailedURLs:(NSURL *)url;
+
 
 @end
 
