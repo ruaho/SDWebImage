@@ -298,7 +298,19 @@
 - (BOOL)isRunning {
     return self.runningOperations.count > 0;
 }
-
+- (void)removeFailedURLs:(NSURL *)url {
+    if ([url isKindOfClass:NSString.class]) {
+        url = [NSURL URLWithString:(NSString *)url];
+    }
+    
+    if (![url isKindOfClass:NSURL.class] || self.failedURLs == nil) {
+        return;
+    }
+    
+    @synchronized (self.failedURLs) {
+        [self.failedURLs removeObject:url];
+    }
+}
 @end
 
 
