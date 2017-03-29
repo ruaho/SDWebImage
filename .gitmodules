@@ -1,3 +1,0 @@
-[submodule "path/to/submodule"]
-	path = path/to/submodule
-	url = git@github.com:buleSky111/SDWebImage.git
