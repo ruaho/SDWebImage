@@ -164,7 +164,8 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
 
 - (nullable NSString *)defaultCachePathForKey:(nullable NSString *)key {
-    return [self cachePathForKey:key inPath:self.diskCachePath];
+    NSString *localPath = [self getPathForKey:key];
+    return [self cachePathForKey:key inPath:localPath];
 }
 
 - (nullable NSString *)cachedFileNameForKey:(nullable NSString *)key {
