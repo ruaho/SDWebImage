@@ -24,8 +24,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.framework = 'ImageIO'
   
-  s.default_subspec = 'Core'
-
+  s.default_subspec = 'Core', 'GIF'
   s.subspec 'Core' do |core|
     core.source_files = 'SDWebImage/{NS,SD,UI}*.{h,m}'
     core.exclude_files = 'SDWebImage/UIImage+WebP.{h,m}'
