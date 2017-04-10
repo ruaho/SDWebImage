@@ -151,7 +151,7 @@
         if (timeoutInterval == 0.0) {
             timeoutInterval = 15.0;
         }
-
+        
         // In order to prevent from potential duplicate caching (NSURLCache + SDImageCache) we disable the cache for image requests if told otherwise
         NSURLRequestCachePolicy cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         if (options & SDWebImageDownloaderUseNSURLCache) {
@@ -164,8 +164,7 @@
         request.HTTPShouldUsePipelining = YES;
         if (sself.headersFilter) {
             request.allHTTPHeaderFields = sself.headersFilter(url, [sself.HTTPHeaders copy]);
-        }
-        else {
+        } else {
             request.allHTTPHeaderFields = sself.HTTPHeaders;
         }
         SDWebImageDownloaderOperation *operation = [[sself.operationClass alloc] initWithRequest:request inSession:sself.session options:options];
