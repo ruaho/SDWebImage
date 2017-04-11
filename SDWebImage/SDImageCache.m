@@ -643,7 +643,6 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
     });
 }
 
-
 /**
  * 根据urlkey获取存储路径
  * 如果urlkey中包含category参数, 我们会保存该urlkey文件到对应的category目录下,  如果目录不存在会创建该category目录
